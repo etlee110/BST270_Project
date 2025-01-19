@@ -15,17 +15,32 @@ format:
 code-fold: true
 ---
 
-## Quarto
+## Plane Crashes
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+This script reproduces two figures from this FiveThirtyEight article [Should Travelers Avoid Flying Airlines That Have Had Crashes in the Past?
+](https://fivethirtyeight.com/features/should-travelers-avoid-flying-airlines-that-have-had-crashes-in-the-past/)
 
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
+## Part 1
+First, load the data from 
 ```{r}
-1 + 1
+# Download and Read the Plane Safety Data
+airplane_data <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/data/refs/heads/master/airline-safety/airline-safety.csv")
+
+# Define the Path to Save the CSV File
+output_dir <- "data"
+output_file <- file.path(output_dir, "airplane_data.csv")
+
+# Check if the 'data' Directory Exists; If Not, Create It
+if (!dir.exists(output_dir)) {
+  dir.create(output_dir, recursive = TRUE)
+  message(paste("Created directory:", output_dir))
+}
+
+write.csv(airplane_data, file = output_file, quote = FALSE, row.names = FALSE)
+message(paste("Data successfully written to:", output_file))
 ```
+
+
 
 You can add options to executable code like this
 
